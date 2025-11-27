@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyrahmo | Python Developer</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --text-color: #ffffff;
+            --accent-color: #00ff41; /* Цвет хакера */
+            --card-bg: rgba(255, 255, 255, 0.05);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* --- ШАПКА --- */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 40px;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-image: url('avatar.jpg'); /* НЕ ЗАБУДЬ ЗАЛИТЬ ФОТО */
+            background-size: cover;
+            background-position: center;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 15px var(--accent-color);
+            margin: 0 auto 20px;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* --- КНОПКИ СВЯЗИ --- */
+        .links {
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+            transform: translateY(-2px);
+            color: var(--accent-color);
+        }
+
+        .btn span { margin-right: 10px; }
+
+        /* --- СЕКЦИЯ КЕЙСОВ (НОВОЕ) --- */
+        .portfolio-title {
+            font-size: 1.2rem;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        /* На компах делаем 2 колонки, на мобилках 1 */
+        @media (min-width: 600px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .case-card {
+            background: var(--card-bg);
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            transition: 0.3s;
+        }
+
+        .case-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        .case-title {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .case-desc {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .case-link {
+            font-size: 0.8rem;
+            color: #888;
+            text-decoration: none;
+            border-bottom: 1px dashed #888;
+        }
+        .case-link:hover { color: white; border-color: white; }
+
+        footer {
+            margin-top: 50px;
+            font-size: 0.7rem;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <div class="header">
+        <div class="avatar"></div>
+        <h1>HYRAHMO</h1>
+        <div class="subtitle">Python Developer | Quant | Automation</div>
+    </div>
+
+    <!-- КНОПКИ ДЕЙСТВИЯ -->
+    <div class="links">
+        <a href="https://t.me/hyrahmo" class="btn" target="_blank">
+            <span>💬</span> Написать в Telegram
+        </a>
+        <a href="https://kwork.ru/user/твой_профиль" class="btn" target="_blank">
+            <span>⚡</span> Заказать на Kwork
+        </a>
+        <a href="https://hyrahmo.ru" class="btn" style="border-color: #555;">
+            <span>🧠</span> Мой Блог (English)
+        </a>
+    </div>
+
+    <!-- ПОРТФОЛИО / КЕЙСЫ -->
+    <div class="portfolio-title">⚡ Избранные Кейсы</div>
+    
+    <div class="portfolio-grid">
+        
+        <!-- КЕЙС 1: ТЕЛЕГРАМ МАГАЗИН -->
+        <div class="case-card">
+            <div class="case-title">🛒 TG Shop Bot</div>
+            <div class="case-desc">
+                Полноценный интернет-магазин внутри Telegram. 
+                Категории товаров, корзина, админ-панель для управления ценами.
+                Стек: Aiogram, SQLite.
+            </div>
+            <a href="https://github.com/hyrahmo/shop-bot" class="case-link" target="_blank">>> Смотреть код на GitHub</a>
+        </div>
+
+        <!-- КЕЙС 2: ПАРСЕР -->
+        <div class="case-card">
+            <div class="case-title">📊 Crypto/Price Parser</div>
+            <div class="case-desc">
+                Скрипт мониторинга цен конкурентов или бирж. 
+                Автоматический сбор данных каждые 5 минут и уведомление в Telegram при изменении цены.
+            </div>
+            <a href="https://github.com/hyrahmo/parser" class="case-link" target="_blank">>> Смотреть код на GitHub</a>
+        </div>
+
+        <!-- КЕЙС 3: CRM СИСТЕМА -->
+        <div class="case-card">
+            <div class="case-title">🤖 Feedback CRM Bot</div>
+            <div class="case-desc">
+                Бот для приема заявок и обратной связи. 
+                Пересылает сообщения админу, позволяет отвечать пользователям анонимно.
+                Система "Анти-спам".
+            </div>
+            <a href="https://github.com/hyrahmo/crm-bot" class="case-link" target="_blank">>> Смотреть код на GitHub</a>
+        </div>
+
+        <!-- КЕЙС 4: АВТОМАТИЗАЦИЯ -->
+        <div class="case-card">
+            <div class="case-title">⚙️ Automation Scripts</div>
+            <div class="case-desc">
+                Скрипты для работы с Excel/Google Sheets.
+                Автоматическая обработка заявок с почты и сортировка файлов.
+            </div>
+            <a href="https://github.com/hyrahmo" class="case-link" target="_blank">>> Профиль GitHub</a>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2025 Hyrahmo Systems. Built in Russia.
+    </footer>
+
+</body>
+</html>
