@@ -2,204 +2,251 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
-    <!-- SEO -->
-    <title>Hyrahmo | Python Developer: Боты, Парсеры, Автоматизация</title>
-    <meta name="description" content="Частный разработчик Hyrahmo. Telegram боты, парсинг, скрипты. Работаю напрямую и через биржи. Made in Russia.">
+    <!-- SEO OPTIMIZATION -->
+    <title>Hyrahmo | Разработка Telegram Ботов и Парсеров (Python)</title>
+    <meta name="description" content="Частный Python разработчик Hyrahmo. Создание торговых ботов, парсинг сайтов, автоматизация процессов. Оплата картой/криптой. Быстро и без посредников.">
     
     <link rel="icon" type="image/x-icon" href="favicon.png">
 
-    <!-- СТИЛИ -->
+    <!-- СТИЛИ (QUANT / CYBERPUNK) -->
     <style>
         :root {
-            --bg-color: #0d0d0d;
-            --text-color: #ffffff;
+            --bg-color: #050505;
+            --text-color: #e0e0e0;
             --accent-color: #00ff41; /* Hacker Green */
-            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent-dim: rgba(0, 255, 65, 0.1);
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --border: 1px solid rgba(0, 255, 65, 0.3);
         }
+
+        * { box-sizing: border-box; }
 
         body {
             background-color: var(--bg-color);
+            background-image: 
+                linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px; /* Эффект сетки */
             color: var(--text-color);
             font-family: 'Courier New', Courier, monospace;
-            margin: 0; padding: 20px;
+            margin: 0; padding: 0;
             display: flex; flex-direction: column; align-items: center;
-            padding-bottom: 100px; /* Отступ под плавающую кнопку */
+            overflow-x: hidden;
+            padding-bottom: 90px; /* Место для кнопки */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         /* --- ШАПКА --- */
-        .header { text-align: center; margin: 30px 0; }
+        .header { text-align: center; margin-top: 30px; margin-bottom: 30px; }
+        
+        .avatar-box {
+            position: relative; width: 120px; height: 120px; margin: 0 auto 15px;
+        }
         .avatar {
-            width: 120px; height: 120px; margin: 0 auto 15px;
-            background-image: url('avatar.png'); background-size: cover;
-            border-radius: 50%; border: 2px solid var(--accent-color);
-            box-shadow: 0 0 20px rgba(0,255,65,0.2);
+            width: 100%; height: 100%;
+            background-image: url('avatar.png'); 
+            background-size: cover; background-position: center;
+            border-radius: 50%;
+            border: 2px solid var(--accent-color);
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.4);
+            position: relative; z-index: 2;
         }
-        h1 { margin: 0; font-size: 2rem; letter-spacing: 2px; }
-        .subtitle { color: var(--accent-color); font-weight: bold; margin-bottom: 5px; }
-        .status { font-size: 0.8rem; color: #888; background: #1a1a1a; padding: 5px 10px; border-radius: 20px; display: inline-block; }
+        .avatar-box::after {
+            content: ''; position: absolute; top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border-radius: 50%; border: 1px dashed var(--accent-color);
+            animation: spin 10s linear infinite; z-index: 1;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* --- ГЛАВНАЯ КНОПКА --- */
-        .main-cta {
-            width: 100%; max-width: 400px; margin-bottom: 30px;
+        h1 { font-size: 2.2rem; margin: 0; letter-spacing: 2px; text-shadow: 0 0 10px var(--accent-dim); }
+        .role { color: var(--accent-color); font-weight: bold; font-size: 1rem; margin-bottom: 5px; }
+        .status { 
+            font-size: 0.75rem; color: #888; background: #111; 
+            padding: 4px 12px; border-radius: 20px; border: 1px solid #333;
+            display: inline-block; margin-top: 5px;
         }
-        .btn-big {
+
+        /* --- ГЛАВНАЯ КНОПКА (CTA) --- */
+        .main-cta-box { width: 100%; margin-bottom: 30px; }
+        .btn-glitch {
             display: flex; justify-content: center; align-items: center;
-            width: 100%; padding: 20px;
-            background: rgba(0, 255, 65, 0.1);
-            border: 1px solid var(--accent-color); border-radius: 10px;
+            width: 100%; padding: 18px;
+            background: var(--accent-dim);
+            border: 1px solid var(--accent-color);
             color: var(--accent-color); text-decoration: none;
-            font-size: 1.2rem; font-weight: bold; text-transform: uppercase;
+            font-size: 1.1rem; font-weight: bold; text-transform: uppercase;
             box-shadow: 0 0 15px rgba(0,255,65,0.1);
-            animation: pulse 2s infinite;
+            transition: 0.3s; clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
         }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 255, 65, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 65, 0); }
+        .btn-glitch:active { transform: scale(0.98); background: rgba(0,255,65,0.2); }
+        .btn-subtext { text-align: center; font-size: 0.75rem; color: #666; margin-top: 8px; }
+
+        /* --- СЕТКА ПЛАТФОРМ --- */
+        .section-title {
+            width: 100%; border-bottom: 1px solid #333; 
+            color: var(--accent-color); font-size: 1.2rem; margin-bottom: 15px; padding-bottom: 5px;
+        }
+        .grid-links {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; margin-bottom: 40px;
+        }
+        .link-card {
+            background: var(--card-bg); border: 1px solid #333; padding: 12px;
+            text-align: center; text-decoration: none; border-radius: 6px;
+            transition: 0.3s; display: flex; flex-direction: column; justify-content: center;
+        }
+        .link-card:hover { border-color: var(--accent-color); background: #1a1a1a; }
+        .link-title { display: block; color: white; font-weight: bold; font-size: 0.9rem; }
+        .link-desc { display: block; color: #777; font-size: 0.7rem; margin-top: 3px; }
+
+        /* --- УСЛУГИ --- */
+        .service-row {
+            width: 100%; margin-bottom: 15px; 
+            background: linear-gradient(90deg, rgba(255,255,255,0.03), transparent);
+            padding: 15px; border-left: 3px solid var(--accent-color);
+        }
+        .service-row h3 { margin: 0 0 5px; color: white; font-size: 1rem; }
+        .service-row p { margin: 0; font-size: 0.85rem; color: #aaa; }
+
+        /* --- ОПЛАТА --- */
+        .payment-box {
+            width: 100%; background: #111; padding: 15px; border-radius: 8px; border: 1px dashed #444; margin-bottom: 40px;
+        }
+        .pay-row { display: flex; align-items: center; margin-bottom: 8px; font-size: 0.9rem; color: #ccc; }
+        .pay-icon { margin-right: 10px; color: var(--accent-color); }
+
+        /* --- SEO FOOTER --- */
+        .seo-footer {
+            width: 100%; margin-top: 20px; border-top: 1px solid #222; padding-top: 20px;
+            font-family: monospace; font-size: 0.7rem; color: #444; text-align: left;
+        }
+        
+        /* --- COPY & MADE IN --- */
+        .copy { text-align: center; font-size: 0.7rem; color: #333; margin-bottom: 50px; margin-top: 20px; }
+        .made-in { 
+            margin-top: 8px; font-size: 0.65rem; color: #444; opacity: 0.6;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        /* --- СЕТКА ПЛОЩАДОК --- */
-        .platforms-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-            width: 100%; max-width: 400px; margin-bottom: 40px;
-        }
-        .btn-platform {
-            background: var(--card-bg); border: 1px solid #333;
-            padding: 15px; border-radius: 8px; text-align: center;
-            color: white; text-decoration: none; font-size: 0.9rem;
-            transition: 0.3s;
-        }
-        .btn-platform:hover { border-color: white; background: #222; }
-
-        /* --- БЛОКИ КОНТЕНТА --- */
-        .section { width: 100%; max-width: 600px; margin-bottom: 40px; }
-        .sec-title {
-            color: var(--accent-color); border-bottom: 1px solid #333;
-            padding-bottom: 10px; margin-bottom: 15px; font-size: 1.2rem;
-        }
-
-        /* УСЛУГИ */
-        .service { margin-bottom: 15px; border-left: 2px solid #333; padding-left: 15px; }
-        .service h3 { margin: 0; font-size: 1.1rem; color: white; }
-        .service p { margin: 5px 0 0; font-size: 0.85rem; color: #999; }
-
-        /* FAQ (Про оплату) */
-        .faq-box { background: #111; padding: 15px; border-radius: 8px; border: 1px dashed #444; }
-        .faq-q { color: white; font-weight: bold; margin-bottom: 5px; }
-        .faq-a { color: #888; font-size: 0.9rem; }
-
-        /* --- ПОДВАЛ --- */
-        footer { text-align: center; color: #555; font-size: 0.8rem; margin-top: 20px; }
-        .made-in { color: #888; margin-top: 10px; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
-
-        /* --- ЛИПКАЯ КНОПКА (Всегда внизу) --- */
+        /* --- STICKY BUTTON --- */
         .sticky-btn {
             position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
             width: 90%; max-width: 400px;
-            background: var(--accent-color); color: black;
-            padding: 15px; text-align: center; text-decoration: none;
-            font-weight: bold; border-radius: 50px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-            z-index: 100;
+            background: #000; border: 2px solid var(--accent-color);
+            color: var(--accent-color); padding: 14px; 
+            text-align: center; text-decoration: none; font-weight: bold; font-size: 1rem;
+            border-radius: 50px; box-shadow: 0 5px 20px rgba(0,0,0,0.8);
+            z-index: 100; backdrop-filter: blur(5px);
         }
+        .sticky-btn:active { background: var(--accent-color); color: black; }
     </style>
 </head>
 <body>
 
-    <!-- ШАПКА -->
-    <div class="header">
-        <div class="avatar"></div>
-        <h1>HYRAHMO</h1>
-        <div class="subtitle">Python Quant Developer</div>
-        <div class="status">🟢 Open to Work (Беру заказы)</div>
-    </div>
+    <div class="container">
+        
+        <!-- ШАПКА -->
+        <div class="header">
+            <div class="avatar-box"><div class="avatar"></div></div>
+            <h1>HYRAHMO</h1>
+            <div class="role">Quant Dev & Automation</div>
+            <div class="status">🟢 Беру заказы</div>
+        </div>
 
-    <!-- ГЛАВНОЕ ДЕЙСТВИЕ -->
-    <div class="main-cta">
-        <a href="https://t.me/hyrahmo" class="btn-big">
-            ✈️ Написать в Telegram
-        </a>
-        <p style="text-align: center; color: #666; font-size: 0.8rem; margin-top: 10px;">
-            Отвечаю быстро. Без менеджеров.
-        </p>
-    </div>
+        <!-- ГЛАВНОЕ ДЕЙСТВИЕ -->
+        <div class="main-cta-box">
+            <a href="https://t.me/hyrahmo" class="btn-glitch">
+                <span>⚡ НАПИСАТЬ В TELEGRAM</span>
+            </a>
+            <div class="btn-subtext">Отвечаю лично. Без менеджеров.</div>
+        </div>
 
-    <!-- СЕТКА ПЛОЩАДОК (ДОВЕРИЕ) -->
-    <div class="section">
-        <div class="sec-title">📂 Мои профили (Биржи)</div>
-        <div class="platforms-grid">
-            <!-- Kwork -->
-            <a href="https://kwork.ru/user/hyrahmo" class="btn-platform">
-                🛡️ <strong>Kwork</strong><br><span style="font-size:0.7rem; color:#888">Безопасная сделка</span>
+        <!-- СЕТКА ПРОФИЛЕЙ (6 штук) -->
+        <div class="section-title">📂 Профили</div>
+        <div class="grid-links">
+            <!-- 1. Kwork -->
+            <a href="https://kwork.ru/user/hyrahmo" class="link-card">
+                <span class="link-title">Kwork</span>
+                <span class="link-desc">Безопасная сделка</span>
             </a>
-            <!-- Habr -->
-            <a href="https://freelance.habr.com/freelancers/hyrahmo" class="btn-platform">
-                💼 <strong>Habr</strong><br><span style="font-size:0.7rem; color:#888">Freelance</span>
+            <!-- 2. Habr -->
+            <a href="https://freelance.habr.com/freelancers/hyrahmo" class="link-card">
+                <span class="link-title">Habr</span>
+                <span class="link-desc">Фриланс</span>
             </a>
-            <!-- Profi (Если есть) -->
-            <a href="#" class="btn-platform" style="opacity: 0.5;"> <!-- Сюда вставь ссылку если будет -->
-                🛠️ <strong>Profi.ru</strong><br><span style="font-size:0.7rem; color:#888">Профиль</span>
+            <!-- 3. GitHub -->
+            <a href="https://github.com/hyrahmo" class="link-card">
+                <span class="link-title">GitHub</span>
+                <span class="link-desc">Примеры кода</span>
             </a>
-            <!-- GitHub -->
-            <a href="https://github.com/hyrahmo" class="btn-platform">
-                💻 <strong>GitHub</strong><br><span style="font-size:0.7rem; color:#888">Мой Код</span>
+            <!-- 4. Блог -->
+            <a href="https://t.me/hyrahmo_blog" class="link-card">
+                <span class="link-title">Блог</span>
+                <span class="link-desc">Мой путь</span>
+            </a>
+            <!-- 5. Profi.ru (НОВОЕ) -->
+            <a href="https://profi.ru/profile/HyRM" class="link-card">
+                <span class="link-title">Profi.ru</span>
+                <span class="link-desc">Профиль мастера</span>
+            </a>
+            <!-- 6. Основной сайт (НОВОЕ) -->
+            <a href="https://hyrahmo.ru/freelance" class="link-card" style="border-color: #00ff41;">
+                <span class="link-title">Hyrahmo.ru</span>
+                <span class="link-desc">Основной сайт</span>
             </a>
         </div>
-    </div>
 
-    <!-- ЧТО Я ДЕЛАЮ -->
-    <div class="section">
-        <div class="sec-title">🛠 Услуги</div>
-        <div class="service">
-            <h3>🤖 Telegram Боты</h3>
-            <p>Магазины, воронки продаж, админки. Пишу на Python (Aiogram). Хостинг в подарок.</p>
+        <!-- УСЛУГИ -->
+        <div class="section-title">🛠 Услуги</div>
+        <div class="service-row">
+            <h3>🤖 Telegram Боты (Aiogram)</h3>
+            <p>Магазины, воронки, админки. Не конструктор — чистый Python код.</p>
         </div>
-        <div class="service">
-            <h3>📊 Парсинг и Данные</h3>
-            <p>Сбор баз с сайтов, мониторинг цен, Excel/Google Sheets интеграции.</p>
+        <div class="service-row">
+            <h3>📊 Парсеры и Данные</h3>
+            <p>Сбор цен, баз клиентов, мониторинг. Выгрузка в Excel/Google Sheets.</p>
         </div>
-        <div class="service">
-            <h3>⚙️ Автоматизация</h3>
-            <p>Скрипты для рутины. Если вы делаете что-то руками в браузере — я могу это автоматизировать.</p>
-        </div>
-    </div>
 
-    <!-- ВОПРОС-ОТВЕТ (РЕШАЕМ ПРОБЛЕМУ ОПЛАТЫ) -->
-    <div class="section">
-        <div class="sec-title">💳 Оплата и Гарантии</div>
-        <div class="faq-box">
-            <div class="faq-q">❓ Нет аккаунта на Kwork?</div>
-            <div class="faq-a">
-                Не проблема. Работаю напрямую с физлицами и юрлицами (Самозанятый).<br>
-                Принимаю на карту (СБП), Тинькофф, Сбер, Крипта.<br>
-                Выдаю чек.
+        <!-- ОПЛАТА -->
+        <div class="section-title">💳 Оплата</div>
+        <div class="payment-box">
+            <div class="pay-row"><span class="pay-icon">✓</span> Перевод на карту (СБП)</div>
+            <div class="pay-row"><span class="pay-icon">✓</span> Криптовалюта (USDT/TRX)</div>
+            <div class="pay-row"><span class="pay-icon">✓</span> Безопасная сделка (через Kwork)</div>
+            <div style="margin-top: 10px; font-size: 0.75rem; color: #666; font-style: italic;">
+                *Работаю как частный специалист (P2P). Гарантии — репутация и профили.
             </div>
-            <br>
-            <div class="faq-q">❓ Какие гарантии?</div>
-            <div class="faq-a">
-                Оплата делится: 50% старт / 50% после проверки. Вы ничем не рискуете.<br>
-                Мои отзывы и код — в открытом доступе.
+        </div>
+
+        <!-- SEO FOOTER -->
+        <div class="seo-footer">
+            <h4>[SYSTEM LOGS: SEO DATA]</h4>
+            <div style="line-height: 1.6;">
+                >> Initializing keywords...<br>
+                Разработка чат-ботов на заказ. Парсинг сайтов Python. Заказать телеграм бота недорого.
+                Программист Python фриланс. Скрипты автоматизации бизнеса. Парсер Авито. Парсер цен.
+                Создание торговых роботов Binance Bybit. Hyrahmo разработчик.
+                >> Status: Indexed.
             </div>
         </div>
+
+        <div class="copy">
+            © 2025 Hyrahmo Systems.<br>DevOps & Quant Research.
+            <div class="made-in">🇷🇺 Made in Russia</div>
+        </div>
+
     </div>
 
-    <!-- ПОДВАЛ -->
-    <footer>
-        <a href="https://t.me/hyrahmo_blog" style="color: #666; text-decoration: none; border-bottom: 1px dashed #666;">
-            📢 Читать мой блог (Live)
-        </a>
-        <br><br>
-        &copy; 2025 Hyrahmo Systems.
-        <div class="made-in">
-            🇷🇺 Made in Russia
-        </div>
-    </footer>
-
-    <!-- ЛИПКАЯ КНОПКА (ВИДНА ВСЕГДА) -->
+    <!-- ЛИПКАЯ КНОПКА -->
     <a href="https://t.me/hyrahmo" class="sticky-btn">
-        💬 ОБСУДИТЬ ЗАКАЗ
+        <span>💬 ОБСУДИТЬ ПРОЕКТ</span>
     </a>
 
 </body>
